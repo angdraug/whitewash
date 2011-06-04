@@ -1,0 +1,219 @@
+---
+# whitelist.yaml
+#
+# Allowed HTML tags and attributes
+
+# _common defines attributes that can be present in any tag
+_common:
+  class: &name !ruby/regexp /\A[a-z0-9 .:_-]+\z/i
+  id: *name
+  title: &cdata !ruby/regexp /\A[^'"]*\z/
+  dir: !ruby/regexp /\A(ltr|rtl)\z/i
+  xmlns: &uri !ruby/regexp /\A((http|https|ftp|mailto):[^"\s]+|[^:\s]+)\z/i
+  lang: &lang !ruby/regexp /\A[a-z]+(-[a-z]*)?\z/i
+  "xml:lang": *lang
+  style: *cdata
+  align: &keyword !ruby/regexp /\A[a-z ]+\z/i
+  valign: *keyword
+
+# _css lists CSS properties allowed inside "style" attribute
+_css: [ font-family, font-style, font-variant, font-weight, font-size, font,
+  color, background-color, word-spacing, letter-spacing, text-decoration,
+  vertical-align, text-transform, text-align, text-indent, line-height,
+  margin-top, margin-right, margin-bottom, margin-left, margin, padding-top,
+  padding-right, padding-bottom, padding-left, padding, border-top-width,
+  border-right-width, border-bottom-width, border-left-width, border-width,
+  border-color, border-style, border-top, border-right, border-bottom,
+  border-left, border, width, height, float, clear, whitespace, list-style-type,
+  list-style-position ]
+
+a:
+  href: *uri
+  rel: *keyword
+  rev: *keyword
+  shape: *keyword
+  coords: !ruby/regexp /\A[0-9,]+\z/i
+abbr:
+acronym:
+address:
+b:
+base:
+  href: *uri
+bdo:
+big:
+blockquote:
+  cite: *uri
+body:
+br:
+button:
+  name: *cdata
+  value: *cdata
+  type: *keyword
+  disabled: "disabled"
+caption:
+center:
+cite:
+code:
+col:
+  span: &number !ruby/regexp /\A[0-9]+\z/
+  width: &length !ruby/regexp /\A[0-9]+(%|\*)?\z/
+  char: *cdata
+  charlength: *length
+colgroup:
+  span: *number
+  width: *length
+  char: *cdata
+  charlength: *length
+dd:
+del:
+  cite: *uri
+  datetime: &datetime !ruby/regexp /\A[0-9a-z:-]+\z/i
+dfn:
+div:
+dl:
+dt:
+em:
+fieldset:
+font:
+  color: *cdata
+  face: *cdata
+  size: *cdata
+form:
+  action: *uri
+  method: *keyword
+  enctype: &type !ruby/regexp /\A[ ,a-z0-9\/+-]+\z/i
+h1:
+h2:
+h3:
+h4:
+h5:
+h6:
+head:
+  profile: *uri
+hr:
+html:
+i:
+img:
+  src: &path !ruby/regexp /\A(?!\/\/)[^:]+\z/i
+  alt: *cdata
+  longdesc: *path
+  width: *length
+  height: *length
+  usemap: *path
+  ismap: "ismap"
+  hspace: *length
+  vspace: *length
+input:
+  type: *keyword
+  name: *cdata
+  value: *cdata
+  checked: "checked"
+  size: *cdata
+  maxlength: *number
+  src: *path
+  alt: *cdata
+  usemap: *path
+  disabled: "disabled"
+  readonly: "readonly"
+  accept: *type
+ins:
+  cite: *uri
+  datetime: &datetime !ruby/regexp /\A[0-9a-z:-]+\z/i
+kbd:
+label:
+  for: *name
+legend:
+li:
+link:
+  href: *uri
+  rel: *keyword
+  rev: *keyword
+  type: *type
+  title: *cdata
+  media: *keyword
+map:
+  name: *cdata
+meta:
+  name: *name
+  "http-equiv": *name
+  content: *cdata
+  scheme: *cdata
+ol:
+optgroup:
+  label: *cdata
+  disabled: "disabled"
+option:
+  label: *cdata
+  value: *cdata
+  selected: "selected"
+  disabled: "disabled"
+p:
+pre:
+q:
+  cite: *uri
+samp:
+select:
+  name: *cdata
+  multiple: "multiple"
+  size: *number
+  disabled: "disabled"
+small:
+span:
+strong:
+style:
+  type: *type
+  media: *keyword
+  title: *cdata
+sub:
+sup:
+table:
+  summary: *cdata
+  width: *length
+  border: *number
+  frame: *keyword
+  rules: *keyword
+  cellspacing: *length
+  cellpadding: *length
+  hspace: *length
+  vspace: *length
+tbody:
+  char: *cdata
+  charoff: *length
+td:
+  rowspan: *number
+  colspan: *number
+  headers: &idrefs !ruby/regexp /\A[a-z0-9 ,#.:_-]+\z/i
+  abbr: *cdata
+  scope: *keyword
+  axis: *cdata
+  char: *cdata
+  charoff: *length
+  bgcolor: *cdata
+textarea:
+  name: *cdata
+  rows: *number
+  cols: *number
+  disabled: "disabled"
+  readonly: "readonly"
+tfoot:
+  char: *cdata
+  charoff: *length
+th:
+  rowspan: *number
+  colspan: *number
+  headers: *idrefs
+  abbr: *cdata
+  scope: *keyword
+  axis: *cdata
+  char: *cdata
+  charoff: *length
+thead:
+  char: *cdata
+  charoff: *length
+title:
+tr:
+  char: *cdata
+  charoff: *length
+tt:
+ul:
+var:

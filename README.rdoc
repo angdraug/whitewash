@@ -1,0 +1,70 @@
+= Whitewash - whitelist-based HTML filter for Ruby
+
+This module allows Ruby programs to clean up any HTML document or
+fragment coming from an untrusted source and to remove all dangerous
+constructs that could be used for cross-site scripting or request
+forgery.
+
+
+== Synopsys
+
+  require 'whitewash'
+
+  whitewash = Whitewash.new   # use default whitelist.yaml
+  clean_xhtml = whitewash.sanitize(html)
+
+
+== Summary
+
+All HTML tags, attribute names and values, and CSS properties are
+filtered through a whitelist that defines which names and what kinds of
+values are allowed, everything that doesn't match the whitelist is
+removed.
+
+The whitelist is provided externally, default whitelist is loaded from
+the whitelist.yaml shipped with Whitewash. The default is most strict
+(for example, it does not allow cross-site links to images in IMG tags)
+and can be considered safe for all uses. If you find that it lets
+anything exploitable through, please report it as a bug to Whitewash
+developers.
+
+
+== External Dependencies
+
+Whitewash relies on REXML to parse HTML and put it back together, and
+uses HTML Tidy to transform arbitrary HTML into valid XHTML that REXML
+can understand.
+
+ * REXML:
+
+   * http://www.germane-software.com/software/rexml
+
+ * HTML Tidy:
+
+   * http://tidy.sf.net/
+   * http://rubyforge.org/projects/tidy/
+
+REXML is a part of standard Ruby library, so it is available on any
+system that has Ruby. HTML Tidy needs to be installed separately.
+
+By default, Whitewash looks first for tidy binary under /usr/bin and
+/usr/local/bin, then for libtidy.so shared library under /usr/lib and
+/usr/local/lib. Using the binary is slower, but safer: Ruby/Tidy uses DL
+library to connect to libtidy.so and doesn't work properly when $SAFE is
+greater than 0. If you want to use the library anyway, or if you have
+Tidy installed in a non-standard location, you can override it like
+this:
+
+  whitewash = Whitewash.new(Whitewash.default_whitelist, './tidy')
+
+If there's no .so in the file name, Whitewash will assume that it's a
+binary that can be invoked with popen3.
+
+
+== Copying
+
+  Copyright (c) 2002-2009  Dmitry Borodaenko <angdraug@debian.org>
+
+  This program is free software.
+  You can distribute/modify this program under the terms of the GNU
+  General Public License version 3 or later.
