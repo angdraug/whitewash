@@ -35,14 +35,14 @@ Whitewash relies on REXML to parse HTML and put it back together, and
 uses HTML Tidy to transform arbitrary HTML into valid XHTML that REXML
 can understand.
 
- * REXML:
+* REXML:
 
-   * http://www.germane-software.com/software/rexml
+  * http://www.germane-software.com/software/rexml
 
- * HTML Tidy:
+* HTML Tidy:
 
-   * http://tidy.sf.net/
-   * http://rubyforge.org/projects/tidy/
+  * http://tidy.sf.net/
+  * http://rubyforge.org/projects/tidy/
 
 REXML is a part of standard Ruby library, so it is available on any
 system that has Ruby. HTML Tidy needs to be installed separately.
