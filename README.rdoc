@@ -41,8 +41,8 @@ can understand.
 
 * HTML Tidy:
 
-  * http://tidy.sf.net/
-  * http://rubyforge.org/projects/tidy/
+  * http://tidy.sf.net
+  * http://rubyforge.org/projects/tidy
 
 REXML is a part of standard Ruby library, so it is available on any
 system that has Ruby. HTML Tidy needs to be installed separately.
