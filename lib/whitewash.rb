@@ -11,6 +11,7 @@
 
 require 'rbconfig'
 require 'rexml/document'
+require 'yaml'
 require 'whitewash_rexml_attribute_patch'
 
 class WhitewashError < RuntimeError; end
