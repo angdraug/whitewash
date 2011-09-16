@@ -1,0 +1,64 @@
+-----------------------------------------------------------------
+Revision: 43067aa79f57dfb92165fd94da151d45f56ed87c
+Ancestor: 3a0dff129b6a5408055b65dd804f3831d8d16f15
+Author: angdraug@debian.org
+Date: 2009-08-22T12:36:05
+Branch: whitewash-head
+
+Modified files:
+        lib/whitewash.rb
+
+ChangeLog: 
+
+wrap global variables handling in Thread.exclusive
+
+-----------------------------------------------------------------
+Revision: 3a0dff129b6a5408055b65dd804f3831d8d16f15
+Ancestor: b544d3c9fe594e3862cf518ae51421e1f3816cc9
+Author: angdraug@debian.org
+Date: 2009-08-13T11:01:26
+Branch: whitewash-head
+
+Modified files:
+        README.rdoc lib/whitewash.rb
+
+ChangeLog: 
+
+made it easier to override tidypath
+
+ * made default_whitelist a public class method so that it can be used
+   in Whitewash.new() invokation
+ * documented the way Whitewash looks for Tidy
+
+-----------------------------------------------------------------
+Revision: b544d3c9fe594e3862cf518ae51421e1f3816cc9
+Ancestor: c6398a8b6433921353ec5b0a1cf616804a550961
+Author: angdraug@debian.org
+Date: 2009-07-28T11:25:34
+Branch: whitewash-head
+
+Modified files:
+        lib/whitewash.rb
+
+ChangeLog: 
+
+require rbconfig for access to Config::CONFIG
+
+-----------------------------------------------------------------
+Revision: c6398a8b6433921353ec5b0a1cf616804a550961
+Ancestor: 
+Author: angdraug@debian.org
+Date: 2009-07-27T16:21:20
+Branch: whitewash-head
+
+Added files:
+        COPYING README.rdoc data/whitewash/whitelist.yaml
+        lib/whitewash.rb lib/whitewash_rexml_attribute_patch.rb
+        setup.rb
+Added directories:
+        . data data/whitewash lib
+
+ChangeLog: 
+
+initial checkin: Whitewash is a spin-off of sanitize.rb from Samizdat project
+
