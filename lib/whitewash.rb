@@ -142,7 +142,7 @@ class Whitewash
   private
 
   PATH = [ '/etc/whitewash',
-           File.join(Config::CONFIG['datadir'], 'whitewash'),
+           File.join(Config::CONFIG['datadir'].untaint, 'whitewash'),
            '/usr/local/share/whitewash/' ]
 
   WHITELIST = 'whitelist.yaml'
