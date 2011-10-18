@@ -51,7 +51,8 @@ class Whitewash
   #
   def sanitize_element(xml, whitelist = @whitelist, &p)
     if xml.name =~ /^_/ or not whitelist.keys.include?(xml.name)
-      xml.remove
+      xml.element_children.each {|e| sanitize_element(e, whitelist, &p) }
+      xml.replace(xml.children)
       return
     end
 
