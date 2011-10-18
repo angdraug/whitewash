@@ -1,0 +1,390 @@
+---
+# html5_whitelist.yaml
+#
+# Allowed HTML5 tags and attributes.
+# HTML5 is still under development, and this file
+# definition is actual for 2011, October.
+
+# _common defines attributes that can be present in any tag
+_common:
+  accesskey: !ruby/regexp /\A[:alnum:]\z/
+  class: &name !ruby/regexp /\A[a-z0-9 .:_-]+\z/i
+  contenteditable: !ruby/regexp /\Ztrue|false|inherit\z/
+  contextmenu: *name
+  dir: !ruby/regexp /\Altr|rtl|auto\z/
+  draggable: !ruby/regexp /\Atrue|false|auto\z/
+  dropzone: !ruby/regexp /\Acopy|move|link\z/
+  hidden: "hidden"
+  id: *name
+  lang: &lang !ruby/regexp /\A[a-z]+(-[a-z]*)?\z/i
+  spellcheck: !ruby/regexp /\Atrue|false\z/
+  style: &cdata !ruby/regexp /\A[^'"]*\z/
+  tabindex: &number !ruby/regexp /\A[0-9]+\z/
+  title: *cdata
+
+# _css lists CSS properties allowed inside "style" attribute
+_css: [ animation, animation-name, animation-duration,
+animation-timing-function, animation-delay, animation-iteration-count,
+animation-direction, animation-play-state, background, background-attachment,
+background-color, background-image, background-position, background-repeat,
+background-clip, background-origin, background-size, border, border-bottom,
+border-bottom-color, border-bottom-style, border-bottom-width, border-color,
+border-left, border-left-color, border-left-style, border-left-width,
+border-right, border-right-color, border-right-style, border-right-width,
+border-style, border-top, border-top-color, border-top-style, border-top-width,
+border-width, outline, outline-color, outline-style, outline-width,
+border-bottom-left-radius, border-bottom-right-radius, border-image,
+border-image-outset, border-image-repeat, border-image-slice,
+border-image-source, border-image-width, border-radius, border-top-left-radius,
+border-top-right-radius, box-decoration-break, box-shadow, overflow-x,
+overflow-y, overflow-style, rotation, rotation-point, color-profile, opacity,
+rendering-intent, bookmark-label, bookmark-level, bookmark-target,
+float-offset, hyphenate-after, hyphenate-before, hyphenate-character,
+hyphenate-lines, hyphenate-resource, hyphens, image-resolution, marks,
+string-set, height, max-height, max-width, min-height, min-width, width,
+box-align, box-direction, box-flex, box-flex-group, box-lines,
+box-ordinal-group, box-orient, box-pack, font, font-family, font-size,
+font-style, font-variant, font-weight, font-size-adjust, font-stretch, content,
+counter-increment, counter-reset, quotes, crop, move-to, page-policy,
+grid-columns, grid-rows, target, target-name, target-new, target-position,
+alignment-adjust, alignment-baseline, baseline-shift, dominant-baseline,
+drop-initial-after-adjust, drop-initial-after-align,
+drop-initial-before-adjust, drop-initial-before-align, drop-initial-size,
+drop-initial-value, inline-box-align, line-stacking, line-stacking-ruby,
+line-stacking-shift, line-stacking-strategy, text-height, list-style,
+list-style-image, list-style-position, list-style-type, margin, margin-bottom,
+margin-left, margin-right, margin-top, marquee-direction, marquee-play-count,
+marquee-speed, marquee-style, column-count, column-fill, column-gap,
+column-rule, column-rule-color, column-rule-style, column-rule-width,
+column-span, column-width, columns, padding, padding-bottom, padding-left,
+padding-right, padding-top, fit, fit-position, image-orientation, page, size,
+bottom, clear, clip, cursor, display, float, left, overflow, position, right,
+top, visibility, z-index, orphans, page-break-after, page-break-before,
+page-break-inside, widows, ruby-align, ruby-overhang, ruby-position, ruby-span,
+mark, mark-after, mark-before, phonemes, rest, rest-after, rest-before,
+voice-balance, voice-duration, voice-pitch, voice-pitch-range, voice-rate,
+voice-stress, voice-volume, border-collapse, border-spacing, caption-side,
+empty-cells, table-layout, color, direction, letter-spacing, line-height,
+text-align, text-decoration, text-indent, text-transform, unicode-bidi,
+vertical-align, white-space, word-spacing, hanging-punctuation,
+punctuation-trim, text-align-last, text-justify, text-outline, text-overflow,
+text-shadow, text-wrap, word-break, word-wrap, transform, transform-origin,
+transform-style, perspective, perspective-origin, backface-visibility,
+transition, transition-property, transition-duration,
+transition-timing-function, transition-delay, appearance, box-sizing, icon,
+nav-down, nav-index, nav-left, nav-right, nav-up, outline-offset, resize ]
+
+a:
+  href: &uri !ruby/regexp /\A((http|https|ftp|mailto):[^"\s]+|[^:\s]+)\z/i
+  hreflang: *lang
+  media: &keyword !ruby/regexp /\A[a-z ]+\z/i
+  rel: *keyword
+  target: *keyword
+  type: &type !ruby/regexp /\A[ ,a-z0-9\/+-]+\z/i
+abbr:
+address:
+area:
+  alt: *cdata
+  coords: !ruby/regexp /\A[0-9,]+\z/i
+  href: *uri
+  media: *keyword
+  rel: *keyword
+  target: *keyword
+  type: *type
+article:
+aside:
+audio:
+  autoplay: "autoplay"
+  controls: "controls"
+  loop: "loop"
+  preload: *keyword
+  src: *uri
+b:
+base:
+  href: *uri
+  target: *keyword
+bdo:
+  dir: *keyword
+blockquote:
+  cite: *uri
+body:
+br:
+button:
+  autofocus: "autofocus"
+  disabled: "disabled"
+  form: *name
+  formaction: *uri
+  formenctype: *type
+  formmethod: &method !ruby/regexp /\Aget|post\z/i
+  formnovalidate: "formnovalidate"
+  formtarget: *keyword
+  name: *cdata
+  type: *keyword
+  value: *cdata
+canvas:
+  width: &length !ruby/regexp /\A[0-9]+(%|px)?\z/
+  height: *length
+caption:
+cite:
+code:
+col:
+  span: *number
+colgroup:
+  span: *number
+command:
+  checked: "checked"
+  disabled: "disabled"
+  icon: *uri
+  label: *cdata
+  radiogroup: *name
+  type: *keyword
+datalist:
+dd:
+del:
+  cite: *uri
+  datetime: &datetime !ruby/regexp /\A\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}[A-Z]+\z/i
+details:
+  open: "open"
+dfn:
+div:
+dl:
+dt:
+em:
+embed:
+  height: *length
+  src: *uri
+  type: *type
+  width: *length
+fieldset:
+ disabled: "disabled"
+ form: *name
+ name: *cdata
+figcaption:
+figure:
+footer:
+form:
+  action: *uri
+  "accept-charset": *cdata
+  autocomplete : &onoff !ruby/regexp /\Aon|off\z/
+  enctype: *type
+  method: *method
+  name: *cdata
+  novalidate: "novalidate"
+  target: *keyword
+h1:
+h2:
+h3:
+h4:
+h5:
+h6:
+head:
+header:
+hgroup:
+hr:
+html:
+  manifest: *uri
+  xmlns: "http://www.w3.org/1999/xhtml"
+i:
+iframe:
+  height: *length
+  name: *name
+  sandbox: *keyword
+  seamless: "seamless"
+  src: *uri
+  srcdoc: *cdata
+  width: *length
+img:
+  alt: *cdata
+  src: *uri
+  height: *length
+  usemap: &usemap !ruby/regexp /\A#[a-z0-9 .:_-]+\z/i
+  ismap: "ismap"
+  width: *length
+input:
+  accept: *type
+  alt: *cdata
+  autocomplete: *onoff
+  autofocus: "autofocus"
+  checked: "checked"
+  disabled: "disabled"
+  form: *name
+  formaction: *uri
+  formenctype: *type
+  formmethod: *method
+  formnovalidate: "formnovalidate"
+  formtarget: *keyword
+  height: *length
+  list: *name
+  max: *number # date
+  multiple: "multiple"
+  name: *cdata
+  pattern: *cdata
+  placeholder: *cdata
+  readonly: "readonly"
+  required: "required"
+  size: *number
+  src: *uri
+  step: *number
+  type: *keyword
+  value: *cdata
+  width: *length
+ins:
+  cite: *uri
+  datetime: *datetime
+keygen:
+  autofocus: "disabled"
+  challenge: "challenge"
+  disabled: "disabled"
+  form: *name
+  keytype: *keyword
+  name: *name
+kbd:
+label:
+  for: *name
+  form: *name
+legend:
+li:
+  value: *cdata
+link:
+  href: *uri
+  hreflang: *lang
+  media: *keyword
+  rel: *keyword
+  sizes: &sizes !ruby/regexp /\A[0-9]+x[0-9]+|any\z/
+  target: *keyword
+  type: *type
+map:
+  name: *name
+mark:
+menu:
+  label: *cdata
+  type: *keyword
+meta:
+  carset: *cdata
+  name: *name
+  "http-equiv": *name
+  content: *cdata
+meter:
+  form: *name
+  high: &float !ruby/regexp /\A[0-9]+(\.[0-9]+)?\z/
+  low: *float
+  max: *float
+  min: *float
+  optimun: *float
+  value: *float
+nav:
+noscript:
+object:
+  data: *uri
+  form: *name
+  height: *number
+  hspace: *number
+  name: *name
+  standby: *cdata
+  type: *type
+  usemap: *usemap
+  width: *number
+ol:
+  reversed: "reversed"
+  start: *number
+  type: &listtype !ruby/regexp /\A[1AaIi]\z/
+optgroup:
+  label: *cdata
+  disabled: "disabled"
+option:
+  label: *cdata
+  value: *cdata
+  selected: "selected"
+  disabled: "disabled"
+output:
+  for: *name
+  form: *name
+  name: *name
+p:
+param:
+  name: *name
+  value: *cdata
+pre:
+progress:
+  max: *float
+  value: *float
+q:
+  cite: *uri
+rp:
+rt:
+ruby:
+s:
+samp:
+script:
+  async: "async"
+  defer: "defer"
+  type: *type
+  charset: *cdata
+  src: *uri
+section:
+select:
+  autofocus: "autofocus"
+  disabled: "disabled"
+  form: *name
+  multiple: "multiple"
+  name: *name
+  size: *number
+small:
+source:
+  media: *keyword
+  src: *uri
+  type: *type
+span:
+strong:
+style:
+  type: "text/css"
+  media: *keyword
+  scoped: "scoped"
+sub:
+summary:
+sup:
+table:
+  border: !ruby/regexp /\A1?\z/
+tbody:
+td:
+  colspan: *number
+  headers: &idrefs !ruby/regexp /\A[a-z0-9 ,#.:_-]+\z/i
+  rowspan: *number
+textarea:
+  autofocus: "autofocus"
+  cols: *number
+  disabled: "disabled"
+  dirname: *name
+  form: *name
+  maxlenght: *number
+  name: *name
+  placeholder: *cdata
+  readonly: "readonly"
+  required: "required"
+  rows: *number
+  wrap: &wrap !ruby/regexp /\Ahard|soft\z/i
+tfoot:
+th:
+  colspan: *number
+  headers: *idrefs
+  rowspan: *number
+  scope: *keyword
+thead:
+time:
+  datetime: *datetime
+  pubdate: "pubdate"
+title:
+tr:
+ul:
+var:
+video:
+  audio: "muted"
+  autoplay: "autoplay"
+  controls: "controls"
+  height: *number
+  loop: "loop"
+  poster: *uri
+  preload: !ruby/regexp /\Aauto|metadata|none\z/
+  src: *uri
+  width: *number
+wbr:
