@@ -260,7 +260,7 @@ menu:
   label: *cdata
   type: *keyword
 meta:
-  carset: *cdata
+  charset: *cdata
   name: *name
   "http-equiv": *name
   content: *cdata
