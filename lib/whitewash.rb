@@ -39,7 +39,8 @@ class Whitewash
     \s*\z
   }xi).freeze
 
-  def check_style(css, style)
+  def check_style(whitelist, style)
+    css = whitelist['_css'] or return true
     style.split(';').each do |s|
       return false unless
         s =~ CSS and css.include? $1
@@ -56,6 +57,12 @@ class Whitewash
       return
     end
 
+    # sanitize CSS in <style> elements
+    if 'style' == xml.name and not check_style(whitelist, xml.content)
+      xml.remove
+      return
+    end
+
     xml.attribute_nodes.each do |a|
       attrs ||= whitelist['_common'].merge((whitelist[xml.name] or {}))
       unless attrs[a.name] === a.to_s
@@ -63,10 +70,8 @@ class Whitewash
         next
       end
 
-        # sanitize CSS in style="" attributes
-      if 'style' == a.name and whitelist['_css'] and
-        not check_style(whitelist['_css'], a.value)
-
+      # sanitize CSS in style="" attributes
+      if 'style' == a.name and not check_style(whitelist, a.value)
         xml.remove_attribute(a.name)
         next
       end
@@ -92,10 +97,10 @@ class Whitewash
     rescue Nokogiri::XML::SyntaxError
       raise WhitewashError, "Invalid XHTML detected: " + $!
     end
+    return '' if xml.nil?
 
     sanitize_element(xml, whitelist, &p)
-
-    xml.to_xhtml
+    xml.children.map {|x| x.to_xhtml}.join
   end
 
   private
@@ -105,5 +110,4 @@ class Whitewash
            '/usr/local/share/whitewash/' ]
 
   WHITELIST = 'whitelist.yaml'
-
 end

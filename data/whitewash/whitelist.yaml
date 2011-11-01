@@ -133,11 +133,6 @@ link:
   media: *keyword
 map:
   name: *cdata
-meta:
-  name: *name
-  "http-equiv": *name
-  content: *cdata
-  scheme: *cdata
 ol:
 optgroup:
   label: *cdata
