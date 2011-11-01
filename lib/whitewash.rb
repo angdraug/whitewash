@@ -1,7 +1,7 @@
 # Whitewash: whitelist-based HTML validator for Ruby
 # (originally written for Samizdat project)
 #
-#   Copyright (c) 2002-2009  Dmitry Borodaenko <angdraug@debian.org>
+#   Copyright (c) 2002-2011  Dmitry Borodaenko <angdraug@debian.org>
 #
 #   This program is free software.
 #   You can distribute/modify this program under the terms of
