@@ -17,11 +17,30 @@ class WhitewashError < RuntimeError; end
 
 class Whitewash
 
+  if RUBY_VERSION < '1.9.3'
+    def Whitewash.load(string)
+      YAML.load(string)
+    end
+
+  else
+    # use Syck to parse the whitelist until Psych issue #36 is fixed
+    #
+    def Whitewash.load(string)
+      Mutex.new.synchronize do
+        yamler = YAML::ENGINE.yamler
+        YAML::ENGINE.yamler = 'syck'
+        whitelist = YAML.load(string)
+        YAML::ENGINE.yamler = yamler
+        whitelist
+      end
+    end
+  end
+
   def Whitewash.default_whitelist
     unless found = PATH.find {|dir| File.readable?(File.join(dir, WHITELIST)) }
       raise RuntimeError, "Can't find default whitelist"
     end
-    File.open(File.join(found, WHITELIST)) {|f| YAML.load(f.read.untaint) }
+    File.open(File.join(found, WHITELIST)) {|f| Whitewash.load(f.read.untaint) }
   end
 
   # _whitelist_ is expected to be loaded from xhtml.yaml.
