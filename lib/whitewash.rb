@@ -92,7 +92,7 @@ class Whitewash
   #
   def sanitize(html, whitelist = @whitelist, &p)
     begin
-      xml = Nokogiri::HTML(html) { |config| config.noblanks }
+      xml = Nokogiri::HTML(html) {|config| config.noblanks }
       xml = xml.xpath('//html/body').first
     rescue Nokogiri::XML::SyntaxError
       raise WhitewashError, "Invalid XHTML detected: " + $!
