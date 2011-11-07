@@ -9,7 +9,7 @@ _common:
   id: *name
   title: &cdata !ruby/regexp /\A[^'"]*\z/
   dir: !ruby/regexp /\A(ltr|rtl)\z/i
-  xmlns: &uri !ruby/regexp /\A((http|https|ftp|mailto):[^"\s]+|[^:\s]+)\z/i
+  xmlns: &uri !ruby/regexp /\A((http|https|ftp|mailto):[^'"\s]+|(?!//)[^'":\s]+)\z/i
   lang: &lang !ruby/regexp /\A[a-z]+(-[a-z]*)?\z/i
   "xml:lang": *lang
   style: *cdata
