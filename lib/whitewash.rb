@@ -119,7 +119,7 @@ class Whitewash
     return '' if xml.nil?
 
     sanitize_element(xml, whitelist, &p)
-    xml.children.map {|x| x.to_xhtml}.join
+    xml.children.to_xhtml
   end
 
   private
