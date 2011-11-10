@@ -110,12 +110,8 @@ class Whitewash
   # in the sanitized HTML.
   #
   def sanitize(html, whitelist = @whitelist, &p)
-    begin
-      xml = Nokogiri::HTML(html) {|config| config.noblanks }
-      xml = xml.xpath('//html/body').first
-    rescue Nokogiri::XML::SyntaxError
-      raise WhitewashError, "Invalid XHTML detected: " + $!
-    end
+    xml = Nokogiri::HTML(html) {|config| config.noblanks }
+    xml = xml.xpath('//html/body').first
     return '' if xml.nil?
 
     sanitize_element(xml, whitelist, &p)
