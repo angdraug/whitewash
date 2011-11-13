@@ -103,6 +103,7 @@ b:
 base:
   href: *uri
   target: *keyword
+bdi:
 bdo:
   dir: *keyword
 blockquote:
@@ -375,6 +376,7 @@ time:
   pubdate: "pubdate"
 title:
 tr:
+u:
 ul:
 var:
 video:
