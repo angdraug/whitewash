@@ -122,7 +122,8 @@ class Whitewash
 
   PATH = [ '/etc/whitewash',
            File.join(RbConfig::CONFIG['datadir'].untaint, 'whitewash'),
-           '/usr/local/share/whitewash/' ]
+           '/usr/local/share/whitewash/',
+           File.expand_path('../data/whitewash/', File.dirname(__FILE__)) ]
 
   WHITELIST = 'whitelist.yaml'
 end
