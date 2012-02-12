@@ -12,7 +12,8 @@ constructs that could be used for cross-site scripting or request
 forgery.
     EOF
   spec.files       = `git ls-files`.split "\n"
+  spec.test_files  = Dir['spec/*_spec.rb']
   spec.license     = 'GPL3+'
-#  spec.add_dependency('nokogiri')
-#  spec.add_development_dependency('rspec')
+  spec.add_dependency('nokogiri')
+  spec.add_development_dependency('rspec')
 end
