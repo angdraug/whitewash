@@ -11,9 +11,13 @@ fragment coming from an untrusted source and to remove all dangerous
 constructs that could be used for cross-site scripting or request
 forgery.
     EOF
-  spec.files       = `git ls-files`.split "\n"
+  spec.files       = %w(COPYING ChangeLog.mtn README.rdoc
+                        setup.rb Rakefile whitewash.gemspec) +
+                     Dir['{lib,spec}/**/*.rb'] +
+                     Dir['data/**/*.yaml']
   spec.test_files  = Dir['spec/*_spec.rb']
-  spec.license     = 'GPL3+'
+  spec.license     = 'GPL-3.0+'
   spec.add_dependency('nokogiri')
+  spec.add_development_dependency('rake')
   spec.add_development_dependency('rspec')
 end
