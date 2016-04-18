@@ -1,6 +1,6 @@
 Gem::Specification.new do |spec|
   spec.name        = 'whitewash'
-  spec.version     = '2.0'
+  spec.version     = '2.1'
   spec.author      = 'Dmitry Borodaenko'
   spec.email       = 'angdraug@debian.org'
   spec.homepage    = 'https://github.com/angdraug/whitewash'
