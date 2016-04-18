@@ -17,13 +17,14 @@ class WhitewashError < RuntimeError; end
 
 class Whitewash
 
-  if RUBY_VERSION < '1.9.3'
+  if RUBY_VERSION >= '2.0' or RUBY_VERSION < '1.9.3'
     def Whitewash.load(string)
       YAML.load(string)
     end
 
   else
-    # use Syck to parse the whitelist until Psych issue #36 is fixed
+    # use Syck to parse the whitelist to work around Psych issue #36 that was
+    # present in some versions of Ruby 1.9.3
     #
     def Whitewash.load(string)
       Mutex.new.synchronize do
